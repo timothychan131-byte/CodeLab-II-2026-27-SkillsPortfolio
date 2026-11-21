@@ -8,12 +8,12 @@ import random
 # -------------------------
 
 level = 1
-level = 2
-level = 3
 
 def displayMenu():
     """Shows the difficulty menu."""
     title_label.config(text="DIFFICULTY LEVEL")
+    quiz.pack_forget()
+    menu.pack()
 
 def randomInt():
     if level == 1:
@@ -60,6 +60,8 @@ def displayProblem():
     question_label.config(text=f"{num1} {operation} {num2} = ?")
     answer_entry.delete(0, tk.END)
     feedback.config(text=f"Question {question + 1}/10")
+    
+    answer_entry.focus()
 
 
 def isCorrect():
@@ -144,11 +146,13 @@ title_label = tk.Label(
 )
 title_label.pack(pady=10)
 
-displayMenu()
+
+menu = tk.Frame(window)
+menu.pack()
 
 # Easy Button
 easy_btn = tk.Button(
-    window,
+    menu,
     text="1. Easy",
     width=20,
     command=lambda: startQuiz(1)
@@ -157,7 +161,7 @@ easy_btn.pack(pady=5)
 
 # Medium Button
 medium_btn = tk.Button(
-    window,
+    menu,
     text="2. Medium",
     width=20,
     command=lambda: startQuiz(2)
@@ -166,7 +170,7 @@ medium_btn.pack(pady=5)
 
 # Hard Button
 hard_btn = tk.Button(
-    window,
+    menu,
     text="3. Hard",
     width=20,
     command=lambda: startQuiz(3)
@@ -175,11 +179,28 @@ hard_btn.pack(pady=5)
 
 # Exit Button
 exit_btn = tk.Button(
-    window,
+    menu,
     text="Exit",
     width=20,
     command=window.quit
 )
 exit_btn.pack(pady=20)
+
+# Quiz Screen
+quiz = tk.Frame(window)
+
+question_label = tk.Label(quiz, text="", font=("Arial", 20, "bold"))
+question_label.pack(pady=20)
+
+answer_entry = tk.Entry(quiz, font=("Arial", 14))
+answer_entry.pack(pady=10)
+
+submit_btn = tk.Button(quiz, text="Submit Answer", command=isCorrect)
+submit_btn.pack(pady=10)
+
+feedback = tk.Label(quiz, text="", font=("Arial", 11))
+feedback.pack(pady=10)
+
+displayMenu()
 
 window.mainloop()
