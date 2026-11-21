@@ -1,13 +1,25 @@
 import tkinter as tk
 from tkinter import messagebox
 
+import random
+
 # -------------------------
 # Functions
 # -------------------------
 
+level = 1
+
 def displayMenu():
     """Shows the difficulty menu."""
     title_label.config(text="DIFFICULTY LEVEL")
+
+def randomInt():
+    if level == 1:
+        return random.randint(1, 9)
+    elif level == 2:
+        return random.randint(10, 99)
+    else:
+        return random.randint(1000, 9999)
 
 
 def startQuiz(level):
