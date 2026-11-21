@@ -27,12 +27,88 @@ def decideOperation():
     return random.choice(["+", "-"])
 
 
-def startQuiz(level):
-    """Will start the quiz later."""
-    messagebox.showinfo(
-        "Difficulty Selected",
-        f"You selected {level} difficulty.\n\nQuiz will be added later."
-    )
+def startQuiz(selected):
+    global level, score, question, attempt
+
+    level = selected
+    score = 0
+    question = 0
+    attempt = 0
+
+    menu.pack_forget()
+    quiz.pack()
+
+    displayProblem()
+
+def displayProblem():
+    global num1, num2, answer, attempt
+
+    if question == 10:
+        displayResults()
+        return
+
+    attempt = 0
+    num1 = randomInt()
+    num2 = randomInt()
+    operation = decideOperation()
+
+    if operation == "+":
+        answer = num1 + num2
+    else:
+        answer = num1 - num2
+
+    question_label.config(text=f"{num1} {operation} {num2} = ?")
+    answer_entry.delete(0, tk.END)
+    feedback.config(text=f"Question {question + 1}/10")
+
+
+def isCorrect():
+    global score, question, attempt
+
+    try:
+        user_answer = int(answer_entry.get())
+    except ValueError:
+        feedback.config(text="Please enter a number.")
+        return
+
+    if user_answer == answer:
+        score += 10 if attempt == 0 else 5
+        question += 1
+        displayProblem()
+
+    elif attempt == 0:
+        attempt = 1
+        feedback.config(text="Wrong! Try again.")
+        answer_entry.delete(0, tk.END)
+
+    else:
+        feedback.config(text=f"Wrong! Answer: {answer}")
+        question += 1
+        window.after(1200, displayProblem)
+
+
+def displayResults():
+    quiz.pack_forget()
+
+    if score >= 90:
+        rank = "A+"
+    elif score >= 80:
+        rank = "A"
+    elif score >= 70:
+        rank = "B"
+    elif score >= 60:
+        rank = "C"
+    elif score >= 50:
+        rank = "D"
+    else:
+        rank = "F"
+
+    messagebox.showinfo("Results", f"Score: {score}/100\nRank: {rank}")
+
+    if messagebox.askyesno("Play Again?", "Would you like to play again?"):
+        displayMenu()
+    else:
+        window.destroy()
 
 
 # -------------------------
