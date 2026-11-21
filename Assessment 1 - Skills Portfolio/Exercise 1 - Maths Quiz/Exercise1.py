@@ -8,6 +8,8 @@ import random
 # -------------------------
 
 level = 1
+level = 2
+level = 3
 
 def displayMenu():
     """Shows the difficulty menu."""
@@ -20,6 +22,9 @@ def randomInt():
         return random.randint(10, 99)
     else:
         return random.randint(1000, 9999)
+
+def decideOperation():
+    return random.choice(["+", "-"])
 
 
 def startQuiz(level):
@@ -70,7 +75,7 @@ easy_btn = tk.Button(
     window,
     text="1. Easy",
     width=20,
-    command=lambda: startQuiz("Easy")
+    command=lambda: startQuiz(1)
 )
 easy_btn.pack(pady=5)
 
@@ -79,7 +84,7 @@ medium_btn = tk.Button(
     window,
     text="2. Medium",
     width=20,
-    command=lambda: startQuiz("Medium")
+    command=lambda: startQuiz(2)
 )
 medium_btn.pack(pady=5)
 
@@ -88,7 +93,7 @@ hard_btn = tk.Button(
     window,
     text="3. Hard",
     width=20,
-    command=lambda: startQuiz("Hard")
+    command=lambda: startQuiz(3)
 )
 hard_btn.pack(pady=5)
 
