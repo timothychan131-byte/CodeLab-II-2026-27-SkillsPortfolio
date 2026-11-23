@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import random
+import os
 
 # Main Window
 window = tk.Tk()
@@ -9,7 +10,9 @@ window.geometry("400x300")
 window.resizable(False, False)
 
 def loadJokes():
-    with open("randomJokes.txt", "r") as file:
+    path = os.path.join(os.path.dirname(__file__), "randomJokes.txt")
+
+    with open(path, "r") as file:
         jokes = file.readlines()
 
     return [joke.strip() for joke in jokes if "?" in joke]
