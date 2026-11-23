@@ -33,6 +33,26 @@ def loadStudents():
 
 students = loadStudents()
 
+
+def calculateResults(student):
+    courseworkTotal = sum(student["coursework"])
+    overallMark = courseworkTotal + student["exam"]
+    percentage = (overallMark / 160) * 100
+
+    if percentage >= 70:
+        grade = "A"
+    elif percentage >= 60:
+        grade = "B"
+    elif percentage >= 50:
+        grade = "C"
+    elif percentage >= 40:
+        grade = "D"
+    else:
+        grade = "F"
+
+    return courseworkTotal, overallMark, percentage, grade
+
+
 heading = tk.Label(
     window,
     text="Student Manager",
