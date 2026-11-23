@@ -53,6 +53,29 @@ def calculateResults(student):
     return courseworkTotal, overallMark, percentage, grade
 
 
+def viewAllStudents():
+    resultWindow = tk.Toplevel(window)
+    resultWindow.title("All Student Records")
+    resultWindow.geometry("550x400")
+
+    for student in students:
+        coursework, overall, percentage, grade = calculateResults(student)
+
+        record = (
+            f"Name: {student['name']}\n"
+            f"Student Code: {student['code']}\n"
+            f"Coursework: {coursework}/60\n"
+            f"Exam: {student['exam']}/100\n"
+            f"Overall: {overall}/160\n"
+            f"Percentage: {percentage:.2f}%\n"
+            f"Grade: {grade}\n"
+        )
+
+        label = tk.Label(resultWindow, text=record, justify="left")
+        label.pack(anchor="w", padx=10, pady=5)
+
+
+
 heading = tk.Label(
     window,
     text="Student Manager",
