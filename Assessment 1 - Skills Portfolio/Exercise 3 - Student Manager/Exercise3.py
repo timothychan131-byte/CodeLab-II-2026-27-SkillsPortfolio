@@ -83,4 +83,11 @@ heading = tk.Label(
 )
 heading.pack(pady=20)
 
+viewButton = tk.Button(
+    window,
+    text="View All Student Records",
+    command=viewAllStudents
+)
+viewButton.pack(pady=10)
+
 window.mainloop()
