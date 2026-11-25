@@ -153,94 +153,152 @@ def displayResults():
         window.destroy()
 
 
+
 # -------------------------
 # Main Window
 # -------------------------
 
 window = tk.Tk()
 window.title("Maths Quiz")
-window.geometry("400x350")
+window.geometry("500x500")
 window.resizable(False, False)
+window.config(bg="#EAF0F6")
+
+# Colours
+background = "#EAF0F6"
+dark_blue = "#243B53"
+button_blue = "#2878B5"
+white = "#FFFFFF"
+text_colour = "#526579"
 
 # Heading
 heading = tk.Label(
     window,
-    text="Maths Quiz",
-    font=("Arial", 20, "bold")
+    text="MATHS QUIZ",
+    font=("Arial", 22, "bold"),
+    bg=background,
+    fg=dark_blue
 )
-heading.pack(pady=20)
+heading.pack(pady=(25, 10))
 
 # Instructions
 info_label = tk.Label(
     window,
     text="Choose a difficulty level to begin.",
-    font=("Arial", 11)
+    font=("Arial", 11),
+    bg=background,
+    fg=text_colour
 )
 info_label.pack(pady=10)
 
 # Difficulty Title
 title_label = tk.Label(
     window,
-    text="",
-    font=("Arial", 14, "bold")
+    text="SELECT DIFFICULTY",
+    font=("Arial", 13, "bold"),
+    bg=background,
+    fg=dark_blue
 )
 title_label.pack(pady=10)
 
-
-menu = tk.Frame(window)
+menu = tk.Frame(window, bg=background)
 menu.pack()
 
 # Easy Button
 easy_btn = tk.Button(
     menu,
-    text="1. Easy",
-    width=20,
+    text="1. EASY",
+    width=22,
+    bg=button_blue,
+    fg=white,
+    font=("Arial", 11, "bold"),
+    relief="flat",
     command=lambda: startQuiz(1)
 )
-easy_btn.pack(pady=5)
+easy_btn.pack(pady=5, ipady=5)
 
 # Medium Button
 medium_btn = tk.Button(
     menu,
-    text="2. Medium",
-    width=20,
+    text="2. MEDIUM",
+    width=22,
+    bg=button_blue,
+    fg=white,
+    font=("Arial", 11, "bold"),
+    relief="flat",
     command=lambda: startQuiz(2)
 )
-medium_btn.pack(pady=5)
+medium_btn.pack(pady=5, ipady=5)
 
 # Hard Button
 hard_btn = tk.Button(
     menu,
-    text="3. Hard",
-    width=20,
+    text="3. HARD",
+    width=22,
+    bg=button_blue,
+    fg=white,
+    font=("Arial", 11, "bold"),
+    relief="flat",
     command=lambda: startQuiz(3)
 )
-hard_btn.pack(pady=5)
+hard_btn.pack(pady=5, ipady=5)
 
 # Exit Button
 exit_btn = tk.Button(
     menu,
-    text="Exit",
-    width=20,
+    text="EXIT",
+    width=22,
+    bg=dark_blue,
+    fg=white,
+    font=("Arial", 11, "bold"),
+    relief="flat",
     command=window.quit
 )
-exit_btn.pack(pady=20)
+exit_btn.pack(pady=15, ipady=5)
 
 # Quiz Screen
-quiz = tk.Frame(window)
+quiz = tk.Frame(window, bg=background)
 
-question_label = tk.Label(quiz, text="", font=("Arial", 20, "bold"))
-question_label.pack(pady=20)
+question_label = tk.Label(
+    quiz,
+    text="",
+    font=("Arial", 24, "bold"),
+    bg=background,
+    fg=dark_blue
+)
+question_label.pack(pady=25)
 
-answer_entry = tk.Entry(quiz, font=("Arial", 14))
+answer_entry = tk.Entry(
+    quiz,
+    font=("Arial", 16),
+    justify="center",
+    relief="solid",
+    bd=1
+)
 answer_entry.pack(pady=10)
 
-submit_btn = tk.Button(quiz, text="Submit Answer", command=isCorrect)
-submit_btn.pack(pady=10)
+submit_btn = tk.Button(
+    quiz,
+    text="Submit Answer",
+    width=22,
+    bg=button_blue,
+    fg=white,
+    font=("Arial", 11, "bold"),
+    relief="flat",
+    command=isCorrect
+)
+submit_btn.pack(pady=10, ipady=5)
 
-feedback = tk.Label(quiz, text="", font=("Arial", 11))
-feedback.pack(pady=10)
+feedback = tk.Label(
+    quiz,
+    text="",
+    font=("Arial", 11, "bold"),
+    bg=background,
+    fg=dark_blue
+)
+feedback.pack(pady=15)
 
 displayMenu()
+
 
 window.mainloop()
