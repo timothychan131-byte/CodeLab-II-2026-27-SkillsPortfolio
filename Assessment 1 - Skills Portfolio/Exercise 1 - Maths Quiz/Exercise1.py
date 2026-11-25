@@ -64,29 +64,64 @@ def displayProblem():
     answer_entry.focus()
 
 
+
 def isCorrect():
-    global score, question, attempt
+    global score, attempt
 
     try:
-        user_answer = int(answer_entry.get())
+        userAnswer = int(answer_entry.get())
     except ValueError:
-        feedback.config(text="Please enter a number.")
+        feedback.config(
+            text="Please enter a number!",
+            fg="orange"
+        )
         return
 
-    if user_answer == answer:
-        score += 10 if attempt == 0 else 5
-        question += 1
-        displayProblem()
+    if userAnswer == answer:
+        if attempt == 0:
+            score += 10
+            feedback.config(
+                text="Correct! You earned 10 points.",
+                fg="green"
+            )
+        else:
+            score += 5
+            feedback.config(
+                text="Correct! You earned 5 points.",
+                fg="green"
+            )
 
-    elif attempt == 0:
-        attempt = 1
-        feedback.config(text="Wrong! Try again.")
-        answer_entry.delete(0, tk.END)
+        answer_entry.config(state="disabled")
+        submit_btn.config(text="Continue", command=continueQuiz)
 
     else:
-        feedback.config(text=f"Wrong! Answer: {answer}")
-        question += 1
-        window.after(1200, displayProblem)
+        if attempt == 0:
+            attempt = 1
+            feedback.config(
+                text="Incorrect! You have 1 more attempt.",
+                fg="red"
+            )
+            answer_entry.delete(0, tk.END)
+        else:
+            feedback.config(
+                text=f"Incorrect again! The answer was {answer}.",
+                fg="red"
+            )
+            answer_entry.config(state="disabled")
+            submit_btn.config(text="Continue", command=continueQuiz)
+
+
+def continueQuiz():
+    global question
+
+    question += 1
+
+    if question <= 10:
+        submit_btn.config(text="Submit", command=isCorrect)
+        displayProblem()
+    else:
+        displayResults()
+
 
 
 def displayResults():
