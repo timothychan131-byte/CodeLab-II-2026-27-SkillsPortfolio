@@ -48,6 +48,12 @@ def displayProblem():
         return
 
     attempt = 0
+
+    # Reset the answer box and button for the new question
+    answer_entry.config(state="normal")
+    answer_entry.delete(0, tk.END)
+    submit_btn.config(text="Submit", command=isCorrect)
+
     num1 = randomInt()
     num2 = randomInt()
     operation = decideOperation()
@@ -58,9 +64,8 @@ def displayProblem():
         answer = num1 - num2
 
     question_label.config(text=f"{num1} {operation} {num2} = ?")
-    answer_entry.delete(0, tk.END)
     feedback.config(text=f"Question {question + 1}/10")
-    
+
     answer_entry.focus()
 
 
