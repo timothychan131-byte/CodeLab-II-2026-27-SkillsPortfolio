@@ -166,10 +166,10 @@ window.config(bg="#EAF0F6")
 
 # Colours
 background = "#EAF0F6"
-dark_blue = "#243B53"
-button_blue = "#2878B5"
+dark_red = "#532424"
+button_red = "#B52828"
 white = "#FFFFFF"
-text_colour = "#526579"
+text_colour = "#A7B6C5"
 
 # Heading
 heading = tk.Label(
@@ -177,7 +177,7 @@ heading = tk.Label(
     text="MATHS QUIZ",
     font=("Arial", 22, "bold"),
     bg=background,
-    fg=dark_blue
+    fg=dark_red
 )
 heading.pack(pady=(25, 10))
 
@@ -197,7 +197,7 @@ title_label = tk.Label(
     text="SELECT DIFFICULTY",
     font=("Arial", 13, "bold"),
     bg=background,
-    fg=dark_blue
+    fg=dark_red        
 )
 title_label.pack(pady=10)
 
@@ -209,7 +209,7 @@ easy_btn = tk.Button(
     menu,
     text="1. EASY",
     width=22,
-    bg=button_blue,
+    bg=button_red,
     fg=white,
     font=("Arial", 11, "bold"),
     relief="flat",
@@ -222,7 +222,7 @@ medium_btn = tk.Button(
     menu,
     text="2. MEDIUM",
     width=22,
-    bg=button_blue,
+    bg=button_red,
     fg=white,
     font=("Arial", 11, "bold"),
     relief="flat",
@@ -235,7 +235,7 @@ hard_btn = tk.Button(
     menu,
     text="3. HARD",
     width=22,
-    bg=button_blue,
+    bg=button_red,
     fg=white,
     font=("Arial", 11, "bold"),
     relief="flat",
@@ -248,7 +248,7 @@ exit_btn = tk.Button(
     menu,
     text="EXIT",
     width=22,
-    bg=dark_blue,
+    bg=dark_red,
     fg=white,
     font=("Arial", 11, "bold"),
     relief="flat",
@@ -264,7 +264,7 @@ question_label = tk.Label(
     text="",
     font=("Arial", 24, "bold"),
     bg=background,
-    fg=dark_blue
+    fg=dark_red
 )
 question_label.pack(pady=25)
 
@@ -281,7 +281,7 @@ submit_btn = tk.Button(
     quiz,
     text="Submit Answer",
     width=22,
-    bg=button_blue,
+    bg=button_red,
     fg=white,
     font=("Arial", 11, "bold"),
     relief="flat",
@@ -294,7 +294,7 @@ feedback = tk.Label(
     text="",
     font=("Arial", 11, "bold"),
     bg=background,
-    fg=dark_blue
+    fg=dark_red
 )
 feedback.pack(pady=15)
 

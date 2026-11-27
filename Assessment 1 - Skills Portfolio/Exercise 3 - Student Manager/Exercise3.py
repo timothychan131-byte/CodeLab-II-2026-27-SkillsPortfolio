@@ -54,11 +54,36 @@ def calculateResults(student):
 
 
 
+
 def viewAllStudents():
     resultWindow = tk.Toplevel(window)
     resultWindow.title("All Student Records")
     resultWindow.geometry("550x500")
     resultWindow.config(bg="#EAF0F6")
+
+    # Create a canvas for scrolling
+    canvas = tk.Canvas(resultWindow, bg="#EAF0F6")
+    canvas.pack(side="left", fill="both", expand=True)
+
+    # Create scrollbar
+    scrollbar = tk.Scrollbar(
+        resultWindow,
+        orient="vertical",
+        command=canvas.yview
+    )
+    scrollbar.pack(side="right", fill="y")
+
+    canvas.config(yscrollcommand=scrollbar.set)
+
+    # Frame inside the canvas
+    recordFrame = tk.Frame(canvas, bg="#EAF0F6")
+
+    canvas.create_window(
+        (0, 0),
+        window=recordFrame,
+        anchor="nw",
+        width=530
+    )
 
     totalPercentage = 0
 
@@ -78,7 +103,7 @@ def viewAllStudents():
         )
 
         label = tk.Label(
-            resultWindow,
+            recordFrame,
             text=record,
             justify="left",
             bg="white",
@@ -101,7 +126,7 @@ def viewAllStudents():
         )
 
         summaryLabel = tk.Label(
-            resultWindow,
+            recordFrame,
             text=summary,
             font=("Arial", 11, "bold"),
             bg="#243B53",
@@ -111,6 +136,11 @@ def viewAllStudents():
             pady=10
         )
         summaryLabel.pack(fill="x", padx=10, pady=10)
+
+    # Update scrolling area
+    recordFrame.update_idletasks()
+    canvas.config(scrollregion=canvas.bbox("all"))
+
 
 
 def viewIndividualStudent():
@@ -233,7 +263,7 @@ heading = tk.Label(
     text="STUDENT MANAGER",
     font=("Arial", 22, "bold"),
     bg="#EAF0F6",
-    fg="#243B53"
+    fg="#4992E0"
 )
 heading.pack(pady=25)
 
@@ -242,7 +272,7 @@ infoLabel = tk.Label(
     text="Choose an option below:",
     font=("Arial", 11),
     bg="#EAF0F6",
-    fg="#526579"
+    fg="#2A4B6F"
 )
 infoLabel.pack(pady=5)
 
@@ -263,7 +293,7 @@ for text, command in buttons:
         text=text,
         width=30,
         command=command,
-        bg="#2878B5",
+        bg="#280F5D",
         fg="white",
         font=("Arial", 10, "bold"),
         relief="flat"
@@ -275,7 +305,7 @@ exitButton = tk.Button(
     text="EXIT",
     width=30,
     command=window.destroy,
-    bg="#243B53",
+    bg="#3C2453",
     fg="white",
     font=("Arial", 10, "bold"),
     relief="flat"
